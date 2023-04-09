@@ -2,7 +2,9 @@
 
 # Convert ppt to html page
 
-演示demo：[https://cxh1205.gitee.io/ppt2html](https://cxh1205.gitee.io/ppt2html)
+演示demo（gitee）：[https://cxh1205.gitee.io/ppt2html](https://cxh1205.gitee.io/ppt2html)
+
+演示demo（github）：[https://cxh1205.github.io/ppt2html/](https://cxh1205.github.io/ppt2html/)
 
 ## 操作：
 
