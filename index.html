@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <title>PPT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            user-select: none;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            z-index: 1000;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="overlay"></div>
+    <img id="slide" src="" />
+    <script>
+        //PPT总数
+        const totalSlides = 2;
+        //PPT的后缀名
+        const suffix = "svg";
+        //必须要求PPT的文件名为00001.svg,00002.svg,00003.svg...的形式，而且应该放在assets文件夹下
+
+
+        let currentSlide = 1;
+        const slideElement = document.getElementById("slide");
+        //预加载图片
+        const preloadImages = (totalSlides) => {
+            for (let i = 1; i <= totalSlides; i++) {
+                const img = new Image();
+                img.src = `assets/${String(currentSlide).padStart(5, "0")}.${suffix}`;
+            }
+        };
+        preloadImages(20);
+        //更新图片
+        const updateSlide = () => {
+            slideElement.src = `assets/${String(currentSlide).padStart(5, "0")}.${suffix}`;
+        };
+        updateSlide();
+        //监听滚轮事件，上划上一张，下滑下一张
+        document.addEventListener("wheel", (event) => {
+            if (event.deltaY > 0) {
+                currentSlide = currentSlide === totalSlides ? 1 : currentSlide + 1;
+            } else {
+                currentSlide = currentSlide === 1 ? totalSlides : currentSlide - 1;
+            }
+            updateSlide();
+        });
+        //监听点击事件，点击屏幕上半部分上一张，下半部分下一张
+        document.addEventListener("click", (event) => {
+            if (event.clientY < window.innerHeight / 2) {
+                currentSlide = currentSlide === 1 ? totalSlides : currentSlide - 1;
+            } else {
+                currentSlide = currentSlide === totalSlides ? 1 : currentSlide + 1;
+            }
+            updateSlide();
+        });
+    </script>
+</body>
+
+</html>
