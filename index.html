@@ -49,6 +49,15 @@
         let currentSlide = 1;
         const slideElement = document.getElementById("slide");
 
+        //获取链接中ppt的序号优先跳转
+        var hash = window.location.hash;
+        if (hash) {
+            var slideNumber = parseInt(hash.substring(1));
+            if (slideNumber >= 1 && slideNumber <= totalSlides) {
+                currentSlide = slideNumber;
+            }
+        }
+
         //更新图片
         const updateSlide = () => {
             slideElement.src = `assets/${String(currentSlide).padStart(5, "0")}.${suffix}`;
