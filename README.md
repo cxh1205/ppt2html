@@ -9,14 +9,16 @@
 ## 操作：
 
 - 滚轮向上为上一张，向下为下一张。
-
 - 点击屏幕上半部分为上一张，点击屏幕下半部分为下一张。
+- 按左键和上键是上一张，按右键和下键以及空格是下一张。
 
 ## Operation:
 
 - Scroll wheel up for the previous sheet, down for the next sheet.
 
 - Click on the top half of the screen for the previous one, click on the bottom half of the screen for the next one.
+
+- Press the left and up keys for the previous one, press the right and down keys and space for the next one
 
 ## 使用方法：
 
@@ -29,6 +31,10 @@
 5. 修改`index.html`，将`totalSlides`变量改为幻灯片的数量，将`suffix`改为导出的后缀名
 6. 双击`index.html`即可打开网页
 
+### 高级-修改导出图片的分辨率
+
+参考[如何从 PowerPoint 导出高分辨率（高 dpi）幻灯片](https://learn.microsoft.com/zh-cn/office/troubleshoot/powerpoint/change-export-slide-resolution)
+
 ## Usage:
 
 **Note: the use of the Chinese version of MS office2016 only tested, not tested other versions and software, may need to make the corresponding changes**
@@ -39,6 +45,10 @@
 4. double click to run `assets\rename_slide.bat`, the file name will change from `幻灯片1.SVG` to `00001.SVG`
 5. Modify `index.html`, change the `totalSlides` variable to the number of slides, and change `suffix` to the exported suffix
 6. Double click `index.html` to open the page
+
+### Advanced - Modify the resolution of exported images
+
+Refer to [How to export high-resolution (high-dpi) slides from PowerPoint](https://learn.microsoft.com/en-us/office/troubleshoot/powerpoint/change-export-slide-resolution)
 
 ## 建议：
 

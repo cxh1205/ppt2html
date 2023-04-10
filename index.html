@@ -37,6 +37,7 @@
     <div id="overlay"></div>
     <img id="slide" src="" />
     <script>
+        //-------------------------配置区---------------------------//
         //PPT总数
         const totalSlides = 8;
         //PPT的后缀名
@@ -44,8 +45,16 @@
         //必须要求PPT的文件名为00001.svg,00002.svg,00003.svg...的形式，而且应该放在assets文件夹下
 
 
+        //-----------------分界线，以下代码不要修改--------------------//
         let currentSlide = 1;
         const slideElement = document.getElementById("slide");
+
+        //更新图片
+        const updateSlide = () => {
+            slideElement.src = `assets/${String(currentSlide).padStart(5, "0")}.${suffix}`;
+        };
+        updateSlide();
+
         //预加载图片
         const preloadImages = (totalSlides) => {
             for (let i = 1; i <= totalSlides; i++) {
@@ -54,11 +63,7 @@
             }
         };
         preloadImages(20);
-        //更新图片
-        const updateSlide = () => {
-            slideElement.src = `assets/${String(currentSlide).padStart(5, "0")}.${suffix}`;
-        };
-        updateSlide();
+
         //监听滚轮事件，上划上一张，下滑下一张
         document.addEventListener("wheel", (event) => {
             if (event.deltaY > 0) {
@@ -68,11 +73,25 @@
             }
             updateSlide();
         });
+
         //监听点击事件，点击屏幕上半部分上一张，下半部分下一张
         document.addEventListener("click", (event) => {
             if (event.clientY < window.innerHeight / 2) {
                 currentSlide = currentSlide === 1 ? totalSlides : currentSlide - 1;
             } else {
+                currentSlide = currentSlide === totalSlides ? 1 : currentSlide + 1;
+            }
+            updateSlide();
+        });
+
+        //监听键盘事件，左键和上键上一张，右键和下键和空格下一张
+        document.addEventListener('keydown', function (event) {
+            if (event.keyCode == 37 || event.keyCode == 38) {
+                // 左键和上键
+                currentSlide = currentSlide === 1 ? totalSlides : currentSlide - 1;
+            }
+            else if (event.keyCode == 39 || event.keyCode == 40 || event.keyCode == 32) {
+                // 右键和下键和空格
                 currentSlide = currentSlide === totalSlides ? 1 : currentSlide + 1;
             }
             updateSlide();
