@@ -61,6 +61,7 @@
         //更新图片
         const updateSlide = () => {
             slideElement.src = `assets/${String(currentSlide).padStart(5, "0")}.${suffix}`;
+            window.location.hash = `#${currentSlide}`;
         };
         updateSlide();
 
