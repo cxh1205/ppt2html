@@ -4,6 +4,7 @@
 <head>
     <title>PPT</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta charset="utf-8" />
     <style>
         body {
             margin: 0;
@@ -61,18 +62,35 @@
         //更新图片
         const updateSlide = () => {
             slideElement.src = `assets/${String(currentSlide).padStart(5, "0")}.${suffix}`;
-            window.location.hash = `#${currentSlide}`;
+            // window.location.hash = `#${currentSlide}`;
         };
-        updateSlide();
 
-        //预加载图片
-        const preloadImages = (totalSlides) => {
+        const img = new Image();
+        img.src = `assets/${String(currentSlide).padStart(5, "0")}.${suffix}`
+        updateSlide();
+        //加载完第一张图片再检测是否第一次浏览
+        window.onload = function () {
+            // 检查用户是否已经看到过提示
+            if (!localStorage.getItem('hasSeenTooltip')) {
+                // 检测设备类型
+                const isMobile = /Mobi|Android|iPad|iPhone|iPod/i.test(navigator.userAgent);
+                let message;
+                if (isMobile) {
+                    message = '上一张：点击屏幕上半部分\n下一张：点击屏幕下半部分';
+                } else {
+                    message = '上一张：←、↑、点击屏幕上半部分、滚轮向上\n下一张：→、↓、点击屏幕下半部分、滚轮向下、空格';
+                }
+                alert(message);
+                // 将提示状态存储到localStorage中
+                localStorage.setItem('hasSeenTooltip', true);
+            }
+
+            //预加载图片
             for (let i = 1; i <= totalSlides; i++) {
                 const img = new Image();
-                img.src = `assets/${String(currentSlide).padStart(5, "0")}.${suffix}`;
+                img.src = `assets/${String(i).padStart(5, "0")}.${suffix}`;
             }
         };
-        preloadImages(20);
 
         //监听滚轮事件，上划上一张，下滑下一张
         document.addEventListener("wheel", (event) => {
